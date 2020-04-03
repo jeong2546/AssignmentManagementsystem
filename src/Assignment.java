@@ -5,11 +5,7 @@ public class Assignment {
 		Scanner input = new Scanner(System.in);
 		Assignmentmanager assignmentmanager = new Assignmentmanager(input);
 		int num = -1 ;
-		
-		
 		while ( num != 6) {
-
-
 			System.out.println("***assignmentmanagementsystem***");
 			System.out.println("1. Add assignment ");
 			System.out.println("2. Delete assignment ");

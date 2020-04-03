@@ -36,7 +36,32 @@ public class Assignmentmanager {
 		System.out.println("과목 : ");
 		String subject = input.next();
 		if (assign.subject.equals(subject)) {
-			System.out.println("assignment to be edited is"+subject);
+			int num = -1 ;
+			while ( num != 4) {
+				System.out.println("**assignment edit menu**");
+				System.out.println("1. edit subject ");
+				System.out.println("2. edit contents ");
+				System.out.println("3. edit date ");
+				System.out.println("4. exit ");
+				System.out.println("Select one number between 1 -4 : ");
+				num = input.nextInt();
+				if(num == 1) {
+					System.out.println("과목 : ");
+					assign.subject = input.next();
+				}
+				if(num == 2) {
+					System.out.println("과제 내용 :");
+					assign.contents = input.next();
+				}
+				if(num == 3) {
+					System.out.println("제출 날짜 :");
+					assign.date = input.next();
+				}
+					
+				else {
+					continue;
+				}
+			}
 		}
 		
 	}
