@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Assignmentmanager {
-	Assign assign;
+	ArrayList<Assign> assigns=new ArrayList<Assign>();
 	Scanner input;
 	
 	Assignmentmanager(Scanner input) {
@@ -9,77 +10,87 @@ public class Assignmentmanager {
 	}
 	
 	public  void addassignment() {
-		assign = new Assign();
-		System.out.println("°ú¸ñ : ");
+		Assign assign = new Assign();
+		System.out.println("ê³¼ëª© : ");
 		assign.subject = input.next();
-		System.out.println("°úÁ¦ ³»¿ë :");
+		System.out.println("ê³¼ì œ ë‚´ìš© :");
 		assign.contents = input.next();
-		System.out.println("Á¦Ãâ ³¯Â¥ :");
+		System.out.println("ì œì¶œ ë‚ ì§œ :");
 		assign.date = input.next();
-
+		assigns.add(assign);
 
 	}
 	public  void deleteassignment() {
-		System.out.println("°ú¸ñ : ");
+		System.out.println("ê³¼ëª© : ");
 		String subject = input.next();
-		if (assign == null) {
+		int index =-1;
+		for (int i=0; i<assigns.size();i++) {
+			if (assigns.get(i).subject.equals(subject)) {
+				index = i;
+				break ;
+			}
+		}
+		if(index>=0) {
+			assigns.remove(index);
+			System.out.println("assignment " +subject+" is deleted");
+		}
+		else {
 			System.out.println("assignment has not been registered");
 
 			return;
 		}
-		if (assign.subject.equals(subject)) {
-			assign = null;
-			System.out.println("assignment is deleted");
-		}
+		
 	}
 	public  void editassignment() {
-		System.out.println("°ú¸ñ : ");
+		System.out.println("ê³¼ëª© : ");
 		String subject = input.next();
-		if (assign.subject.equals(subject)) {
-			int num = -1 ;
-			while ( num != 4) {
-				System.out.println("**assignment edit menu**");
-				System.out.println("1. edit subject ");
-				System.out.println("2. edit contents ");
-				System.out.println("3. edit date ");
-				System.out.println("4. exit ");
-				System.out.println("Select one number between 1 -4 : ");
-				num = input.nextInt();
-				if(num == 1) {
-					System.out.println("°ú¸ñ : ");
-					assign.subject = input.next();
+		for (int i=0; i<assigns.size();i++) {
+			Assign assign = assigns.get(i);
+			if (assign.subject.equals(subject)) {
+				int num = -1;
+				while (num != 4) {
+					System.out.println("**assignment edit menu**");
+					System.out.println("1. edit subject ");
+					System.out.println("2. edit contents ");
+					System.out.println("3. edit date ");
+					System.out.println("4. exit ");
+					System.out.println("Select one number between 1 -4 : ");
+					num = input.nextInt();
+					if (num == 1) {
+						System.out.println("ê³¼ëª© : ");
+						assign.subject = input.next();
+					}
+					if (num == 2) {
+						System.out.println("ê³¼ì œ ë‚´ìš© :");
+						assign.contents = input.next();
+					}
+					if (num == 3) {
+						System.out.println("ì œì¶œ ë‚ ì§œ :");
+						assign.date = input.next();
+					}
+
+					else {
+						continue;
+					}
 				}
-				if(num == 2) {
-					System.out.println("°úÁ¦ ³»¿ë :");
-					assign.contents = input.next();
-				}
-				if(num == 3) {
-					System.out.println("Á¦Ãâ ³¯Â¥ :");
-					assign.date = input.next();
-				}
-					
-				else {
-					continue;
-				}
+				break ;
 			}
 		}
 		
 	}
-	public  void viewassignment() {
-		System.out.println("°ú¸ñ : ");
-		String subject = input.next();
-		if (assign.subject.equals(subject)) {
-			assign.printinfo();
+	public  void viewassignments() {
+//		System.out.println("ê³¼ëª© : ");
+//		String subject = input.next();
+		for (int i=0; i<assigns.size();i++) {
+			assigns.get(i).printinfo();
 		}
-	
 	}
-	public  void viewlastassignment() {
-		System.out.println("°ú¸ñ : ");
-		String lastsubject = input.next();
-		if (assign.subject.equals(lastsubject)) {
-			assign.printinfo();
+	public  void viewlastassignments() {
+//		System.out.println("ê³¼ëª© : ");
+//		String lastsubject = input.next();
+		for (int i=0; i<assigns.size();i++) {
+			assigns.get(i).printinfo();
 		}
-	
 	}
 	
 	
