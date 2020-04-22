@@ -1,5 +1,13 @@
+
+
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import assign.Assign;
+import assign.Groupproject;
+import assign.Kind;
+import assign.Practicum;
 
 public class Assignmentmanager {
 	ArrayList<Assign> assigns=new ArrayList<Assign>();
@@ -10,22 +18,47 @@ public class Assignmentmanager {
 	}
 	
 	public  void addassignment() {
-		Assign assign = new Assign();
-		System.out.println("ê³¼ëª© : ");
-		assign.subject = input.next();
-		System.out.println("ê³¼ì œ ë‚´ìš© :");
-		assign.contents = input.next();
-		System.out.println("ì œì¶œ ë‚ ì§œ :");
-		assign.date = input.next();
-		assigns.add(assign);
-
+		int kind = 0;
+		Assign assign ;
+		while(kind != 1&& kind != 2&& kind != 3) {
+			
+			
+		
+			System.out.println("1 report ");
+			System.out.println("2 practicum ");
+			System.out.println("3 groupproject ");
+			System.out.println("°úÁ¦ÀÇ Á¾·ù¸¦ ¼±ÅÃÇÏ¼¼¿ä. ");
+			kind = input.nextInt();
+			if (kind == 1) {
+				assign = new Assign(Kind.report);
+				assign.getUserInput(input);
+				assigns.add(assign);
+				break ;
+			} 
+			else if (kind == 2) {
+				assign = new Practicum(Kind.practicum);
+				assign.getUserInput(input);
+				assigns.add(assign);
+				break ;
+			}
+			else if (kind == 3) {
+				assign = new Groupproject(Kind.groupproject);
+				assign.getUserInput(input);
+				assigns.add(assign);
+				break ;
+			}
+			else {
+				System.out.println("´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä ");
+			}
+		}
 	}
+	
 	public  void deleteassignment() {
-		System.out.println("ê³¼ëª© : ");
+		System.out.println("°ú¸ñ : ");
 		String subject = input.next();
 		int index =-1;
 		for (int i=0; i<assigns.size();i++) {
-			if (assigns.get(i).subject.equals(subject)) {
+			if (assigns.get(i).getSubject().equals(subject)) {
 				index = i;
 				break ;
 			}
@@ -42,11 +75,11 @@ public class Assignmentmanager {
 		
 	}
 	public  void editassignment() {
-		System.out.println("ê³¼ëª© : ");
+		System.out.println("°ú¸ñ : ");
 		String subject = input.next();
 		for (int i=0; i<assigns.size();i++) {
 			Assign assign = assigns.get(i);
-			if (assign.subject.equals(subject)) {
+			if (assign.getSubject().equals(subject)) {
 				int num = -1;
 				while (num != 4) {
 					System.out.println("**assignment edit menu**");
@@ -57,16 +90,19 @@ public class Assignmentmanager {
 					System.out.println("Select one number between 1 -4 : ");
 					num = input.nextInt();
 					if (num == 1) {
-						System.out.println("ê³¼ëª© : ");
-						assign.subject = input.next();
+						System.out.println("°ú¸ñ : ");
+						String subject1 = input.next();
+						assign.setSubject(subject1);
 					}
 					if (num == 2) {
-						System.out.println("ê³¼ì œ ë‚´ìš© :");
-						assign.contents = input.next();
+						System.out.println("°úÁ¦ ³»¿ë :");
+						String contents = input.next();
+						assign.setContents(contents);
 					}
 					if (num == 3) {
-						System.out.println("ì œì¶œ ë‚ ì§œ :");
-						assign.date = input.next();
+						System.out.println("Á¦Ãâ ³¯Â¥ :");
+						String date = input.next();
+						assign.setDate(date);
 					}
 
 					else {
@@ -79,15 +115,16 @@ public class Assignmentmanager {
 		
 	}
 	public  void viewassignments() {
-//		System.out.println("ê³¼ëª© : ");
+//		System.out.println("°ú¸ñ : ");
 //		String subject = input.next();
+		System.out.println("registered assignment:"+ assigns.size());
 		for (int i=0; i<assigns.size();i++) {
 			assigns.get(i).printinfo();
 		}
 	}
 	public  void viewlastassignments() {
-//		System.out.println("ê³¼ëª© : ");
-//		String lastsubject = input.next();
+//		System.out.println("°ú¸ñ : ");
+//		String lastsubject1 = input.next();
 		for (int i=0; i<assigns.size();i++) {
 			assigns.get(i).printinfo();
 		}

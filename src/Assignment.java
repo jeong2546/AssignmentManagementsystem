@@ -25,10 +25,10 @@ public class Assignment {
 				assignmentmanager.editassignment();
 			}
 			if(num == 4) {
-				assignmentmanager.viewassignment();
+				assignmentmanager.viewassignments();
 			}
 			if(num == 5) {
-				assignmentmanager.viewlastassignment();
+				assignmentmanager.viewlastassignments();
 			}
 			
 			else {

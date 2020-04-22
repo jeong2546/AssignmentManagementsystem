@@ -3,7 +3,7 @@ package assign;
 import java.util.Scanner;
 
 public class Assign {
-	protected Kind kind = Kind.Major;
+	protected Kind kind = Kind.report;
 	protected String subject;
 	protected String contents;
 	protected String date;
@@ -41,7 +41,9 @@ public class Assign {
 	}
 
 
-
+	public Assign(Kind kind) {
+		this.kind = kind;
+	}
 	
 	
 	public Assign() {
@@ -52,7 +54,8 @@ public class Assign {
 
 	}
 	
-	public Assign(String subject, String contents, String date) {
+	public Assign(Kind kind, String subject, String contents, String date) {
+		this.kind = kind;
 		this.subject = subject;
 		this.contents = contents;
 		this.date = date;
@@ -62,7 +65,21 @@ public class Assign {
 	
 	
 	public void printinfo() {
-		System.out.println("과목 : "+ subject +"   과제내용 : "+ contents +"     제출날짜 : "+date);
+		String skind = "none" ;
+		switch(this.kind) {
+		case report :
+			skind = "report";
+			break;
+		case practicum:
+			skind = "practicum";
+			break;
+		case groupproject:
+			skind = "group";
+			break;
+		default:
+			
+		}
+		System.out.println( "과제유형 : "+skind+"   과목 : "+ subject +"   과제내용 : "+ contents +"     제출날짜 : "+date);
 	}
 	public void getUserInput(Scanner input) {
 		System.out.println("과목 : ");
