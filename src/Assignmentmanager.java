@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import assign.Assign;
+import assign.Assigninput;
 import assign.Groupproject;
 import assign.Kind;
 import assign.Practicum;
+import assign.Report;
 
 public class Assignmentmanager {
-	ArrayList<Assign> assigns=new ArrayList<Assign>();
+	ArrayList<Assigninput> assigns=new ArrayList<Assigninput>();
 	Scanner input;
 	
 	Assignmentmanager(Scanner input) {
@@ -19,32 +21,30 @@ public class Assignmentmanager {
 	
 	public  void addassignment() {
 		int kind = 0;
-		Assign assign ;
+		Assigninput assigninput ;
 		while(kind != 1&& kind != 2&& kind != 3) {
-			
-			
-		
+				
 			System.out.println("1 report ");
 			System.out.println("2 practicum ");
 			System.out.println("3 groupproject ");
 			System.out.println("과제의 종류를 선택하세요. ");
 			kind = input.nextInt();
 			if (kind == 1) {
-				assign = new Assign(Kind.report);
-				assign.getUserInput(input);
-				assigns.add(assign);
+				assigninput = new Report(Kind.report);
+				assigninput.getUserInput(input);
+				assigns.add(assigninput);
 				break ;
 			} 
 			else if (kind == 2) {
-				assign = new Practicum(Kind.practicum);
-				assign.getUserInput(input);
-				assigns.add(assign);
+				assigninput = new Practicum(Kind.practicum);
+				assigninput.getUserInput(input);
+				assigns.add(assigninput);
 				break ;
 			}
 			else if (kind == 3) {
-				assign = new Groupproject(Kind.groupproject);
-				assign.getUserInput(input);
-				assigns.add(assign);
+				assigninput = new Groupproject(Kind.groupproject);
+				assigninput.getUserInput(input);
+				assigns.add(assigninput);
 				break ;
 			}
 			else {
@@ -56,6 +56,10 @@ public class Assignmentmanager {
 	public  void deleteassignment() {
 		System.out.println("과목 : ");
 		String subject = input.next();
+		int index = findindex(subject);
+		remove(index, subject);
+	}
+	public int findindex(String subject) {
 		int index =-1;
 		for (int i=0; i<assigns.size();i++) {
 			if (assigns.get(i).getSubject().equals(subject)) {
@@ -63,49 +67,48 @@ public class Assignmentmanager {
 				break ;
 			}
 		}
+		return index;
+	}
+	
+	public int remove(int index, String subject) {
 		if(index>=0) {
 			assigns.remove(index);
 			System.out.println("assignment " +subject+" is deleted");
+			return 1;
 		}
 		else {
 			System.out.println("assignment has not been registered");
 
-			return;
+			return -1;
 		}
-		
 	}
 	public  void editassignment() {
 		System.out.println("과목 : ");
 		String subject = input.next();
 		for (int i=0; i<assigns.size();i++) {
-			Assign assign = assigns.get(i);
+			Assigninput assign = assigns.get(i);
 			if (assign.getSubject().equals(subject)) {
 				int num = -1;
-				while (num != 4) {
-					System.out.println("**assignment edit menu**");
-					System.out.println("1. edit subject ");
-					System.out.println("2. edit contents ");
-					System.out.println("3. edit date ");
-					System.out.println("4. exit ");
-					System.out.println("Select one number between 1 -4 : ");
+				while (num != 6) {
+					showeditmenu();
 					num = input.nextInt();
-					if (num == 1) {
-						System.out.println("과목 : ");
-						String subject1 = input.next();
-						assign.setSubject(subject1);
-					}
-					if (num == 2) {
-						System.out.println("과제 내용 :");
-						String contents = input.next();
-						assign.setContents(contents);
-					}
-					if (num == 3) {
-						System.out.println("제출 날짜 :");
-						String date = input.next();
-						assign.setDate(date);
-					}
-
-					else {
+					switch(num) {
+					case 1:
+						assign.setassignsubject(input);
+						break;
+					case 2:
+						assign.setassigncontents(input);
+						break;
+					case 3:
+						assign.setassigndate(input);
+						break;
+					case 4:
+						assign.setassignplace(input);
+						break;
+					case 5:
+						assign.setassignmember(input);
+						break;
+					default:
 						continue;
 					}
 				}
@@ -115,21 +118,21 @@ public class Assignmentmanager {
 		
 	}
 	public  void viewassignments() {
-//		System.out.println("과목 : ");
-//		String subject = input.next();
 		System.out.println("registered assignment:"+ assigns.size());
 		for (int i=0; i<assigns.size();i++) {
 			assigns.get(i).printinfo();
 		}
 	}
-	public  void viewlastassignments() {
-//		System.out.println("과목 : ");
-//		String lastsubject1 = input.next();
-		for (int i=0; i<assigns.size();i++) {
-			assigns.get(i).printinfo();
-		}
+	
+	
+	public void showeditmenu() {
+		System.out.println("**assignment edit menu**");
+		System.out.println("1. edit subject ");
+		System.out.println("2. edit contents ");
+		System.out.println("3. edit date ");
+		System.out.println("4. edit place ");
+		System.out.println("5. edit member ");
+		System.out.println("6. exit ");
+		System.out.println("Select one number between 1 -6 : ");
 	}
-	
-	
-	
 }

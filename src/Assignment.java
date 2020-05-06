@@ -5,37 +5,35 @@ public class Assignment {
 		Scanner input = new Scanner(System.in);
 		Assignmentmanager assignmentmanager = new Assignmentmanager(input);
 		int num = -1 ;
-		while ( num != 6) {
-			System.out.println("***assignmentmanagementsystem***");
-			System.out.println("1. Add assignment ");
-			System.out.println("2. Delete assignment ");
-			System.out.println("3. Edit assignment ");
-			System.out.println("4. view assignment ");
-			System.out.println("5. view last semester assignment ");
-			System.out.println("6. exit ");
-			System.out.println("Select one number between 1 -6 : ");
+		while ( num != 5) {
+			showmenu();
 			num = input.nextInt();
-			if(num == 1) {
+			switch(num) {
+			case 1:
 				assignmentmanager.addassignment();
-			}
-			if(num == 2) {
+				break;
+			case 2:
 				assignmentmanager.deleteassignment();
-			}
-			if(num == 3) {
+				break;
+			case 3:
 				assignmentmanager.editassignment();
-			}
-			if(num == 4) {
+				break;
+			case 4:
 				assignmentmanager.viewassignments();
-			}
-			if(num == 5) {
-				assignmentmanager.viewlastassignments();
-			}
-			
-			else {
+				break;
+			default:
 				continue;
 			}
 		}
-
+	}
+	public static void showmenu() {
+		System.out.println("***assignmentmanagementsystem***");
+		System.out.println("1. Add assignment ");
+		System.out.println("2. Delete assignment ");
+		System.out.println("3. Edit assignment ");
+		System.out.println("4. view assignment ");
+		System.out.println("6. exit ");
+		System.out.println("Select one number between 1 -5 : ");
 	}
 
 }
