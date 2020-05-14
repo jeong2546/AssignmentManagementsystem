@@ -96,26 +96,34 @@ public class Assignmentmanager {
 			if (assign.getSubject().equals(subject)) {
 				int num = -1;
 				while (num != 6) {
-					showeditmenu();
-					num = input.nextInt();
-					switch(num) {
-					case 1:
-						assign.setassignsubject(input);
-						break;
-					case 2:
-						assign.setassigncontents(input);
-						break;
-					case 3:
-						assign.setassigndate(input);
-						break;
-					case 4:
-						assign.setassignplace(input);
-						break;
-					case 5:
-						assign.setassignmember(input);
-						break;
-					default:
-						continue;
+					try {
+						showeditmenu();
+						num = input.nextInt();
+						switch (num) {
+						case 1:
+							assign.setassignsubject(input);
+							break;
+						case 2:
+							assign.setassigncontents(input);
+							break;
+						case 3:
+							assign.setassigndate(input);
+							break;
+						case 4:
+							assign.setassignplace(input);
+							break;
+						case 5:
+							assign.setassignmember(input);
+							break;
+						default:
+							continue;
+						}
+					} catch (InputMismatchException e) {
+						System.out.println("1에서 6까지 수중 하나를 넣어주세요.");
+						if (input.hasNext()) {
+							input.next();
+						}
+						num = -1;
 					}
 				}
 				break ;
