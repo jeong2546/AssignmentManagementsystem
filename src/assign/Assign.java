@@ -2,6 +2,8 @@ package assign;
 
 import java.util.Scanner;
 
+import exceptions.Dateexception;
+
 public abstract class Assign implements Assigninput{
 	protected Kind kind = Kind.report;
 	protected String subject;
@@ -55,7 +57,10 @@ public abstract class Assign implements Assigninput{
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(String date) throws Dateexception {
+		if (!date.contains("일") && !date.contains("월")) {
+			throw new Dateexception();
+		}
 		this.date = date;
 	}
 
@@ -91,9 +96,16 @@ public abstract class Assign implements Assigninput{
 		this.setContents(contents);
 	}
 	public void setassigndate( Scanner input) {
-		System.out.println("제출 날짜 :");
-		String date = input.next();
-		this.setDate(date);
+		String date = "";
+		while (!date.contains("일") && !date.contains("월")) {
+			System.out.println("제출 날짜 :");
+			date = input.next();
+			try {
+				this.setDate(date);
+			} catch (Dateexception e) {
+				System.out.println("정확한 날짜가 아닙니다. 제출 '월','일'을 포함하여 입력하세요");
+			}
+		}
 	}
 	public void setassignplace(Scanner input) {
 		System.out.println("실습 장소:");

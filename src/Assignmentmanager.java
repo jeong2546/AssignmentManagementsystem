@@ -2,6 +2,7 @@
 
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import assign.Assign;
@@ -23,32 +24,37 @@ public class Assignmentmanager {
 		int kind = 0;
 		Assigninput assigninput ;
 		while(kind != 1&& kind != 2&& kind != 3) {
-				
-			System.out.println("1 report ");
-			System.out.println("2 practicum ");
-			System.out.println("3 groupproject ");
-			System.out.println("과제의 종류를 선택하세요. ");
-			kind = input.nextInt();
-			if (kind == 1) {
-				assigninput = new Report(Kind.report);
-				assigninput.getUserInput(input);
-				assigns.add(assigninput);
-				break ;
-			} 
-			else if (kind == 2) {
-				assigninput = new Practicum(Kind.practicum);
-				assigninput.getUserInput(input);
-				assigns.add(assigninput);
-				break ;
+			try {
+				System.out.println("1 report ");
+				System.out.println("2 practicum ");
+				System.out.println("3 groupproject ");
+				System.out.println("과제의 종류를 선택하세요. ");
+				kind = input.nextInt();
+				if (kind == 1) {
+					assigninput = new Report(Kind.report);
+					assigninput.getUserInput(input);
+					assigns.add(assigninput);
+					break;
+				} else if (kind == 2) {
+					assigninput = new Practicum(Kind.practicum);
+					assigninput.getUserInput(input);
+					assigns.add(assigninput);
+					break;
+				} else if (kind == 3) {
+					assigninput = new Groupproject(Kind.groupproject);
+					assigninput.getUserInput(input);
+					assigns.add(assigninput);
+					break;
+				} else {
+					System.out.println("다시 선택하세요 ");
+				}
 			}
-			else if (kind == 3) {
-				assigninput = new Groupproject(Kind.groupproject);
-				assigninput.getUserInput(input);
-				assigns.add(assigninput);
-				break ;
-			}
-			else {
-				System.out.println("다시 선택하세요 ");
+			catch(InputMismatchException e) {
+				System.out.println("1에서 3까지 수중 하나를 넣어주세요.");
+				if (input.hasNext() ) {
+					input.next();
+				}
+				kind = 0;
 			}
 		}
 	}
