@@ -1,20 +1,27 @@
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import assign.Assign;
 import assign.Assigninput;
 import assign.Groupproject;
 import assign.Kind;
 import assign.Practicum;
 import assign.Report;
+import log.EventLogger;
 
-public class Assignmentmanager {
+public class Assignmentmanager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9173065915114644181L;
+	
+	static EventLogger logger = new EventLogger("log.txt");
 	ArrayList<Assigninput> assigns=new ArrayList<Assigninput>();
-	Scanner input;
+	transient Scanner input;
 	
 	Assignmentmanager(Scanner input) {
 		this.input = input;
@@ -34,16 +41,19 @@ public class Assignmentmanager {
 					assigninput = new Report(Kind.report);
 					assigninput.getUserInput(input);
 					assigns.add(assigninput);
+					logger.log("add a report type assignment");
 					break;
 				} else if (kind == 2) {
 					assigninput = new Practicum(Kind.practicum);
 					assigninput.getUserInput(input);
 					assigns.add(assigninput);
+					logger.log("add a practicum type assignment");
 					break;
 				} else if (kind == 3) {
 					assigninput = new Groupproject(Kind.groupproject);
 					assigninput.getUserInput(input);
 					assigns.add(assigninput);
+					logger.log("add a groupproject type assignment");
 					break;
 				} else {
 					System.out.println("다시 선택하세요 ");
@@ -102,18 +112,23 @@ public class Assignmentmanager {
 						switch (num) {
 						case 1:
 							assign.setassignsubject(input);
+							logger.log("edit assignment's subject");
 							break;
 						case 2:
 							assign.setassigncontents(input);
+							logger.log("edit assignment's contents");
 							break;
 						case 3:
 							assign.setassigndate(input);
+							logger.log("edit assignment's date");
 							break;
 						case 4:
 							assign.setassignplace(input);
+							logger.log("edit assignment's place");
 							break;
 						case 5:
 							assign.setassignmember(input);
+							logger.log("edit assignment's member");
 							break;
 						default:
 							continue;
@@ -137,7 +152,9 @@ public class Assignmentmanager {
 			assigns.get(i).printinfo();
 		}
 	}
-	
+	public void setScanner(Scanner input) {
+		this.input = input;
+	}
 	
 	public void showeditmenu() {
 		System.out.println("**assignment edit menu**");

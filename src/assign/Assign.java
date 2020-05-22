@@ -1,10 +1,16 @@
 package assign;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exceptions.Dateexception;
 
-public abstract class Assign implements Assigninput{
+public abstract class Assign implements Assigninput, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1356590539367836343L;
+	
 	protected Kind kind = Kind.report;
 	protected String subject;
 	protected String contents;
