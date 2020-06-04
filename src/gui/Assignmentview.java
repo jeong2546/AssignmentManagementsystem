@@ -1,13 +1,16 @@
 package gui;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Assignmentview extends JFrame{
+public class Assignmentview extends JPanel{
+	WindowFrame frame;
 
-	public Assignmentview() {
+	public Assignmentview(WindowFrame frame) {
+		this.frame = frame;
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("과목");
 		model.addColumn("내용");
@@ -20,9 +23,7 @@ public class Assignmentview extends JFrame{
 		
 		this.add(sp);
 		
-		this.setSize(300, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
+		
 	}
 
 }
