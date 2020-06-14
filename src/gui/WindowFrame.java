@@ -3,22 +3,27 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import manager.Assignmentmanager;
+
 public class WindowFrame extends JFrame{
 	
+	Assignmentmanager assignmentmanager;
 	MenuSelection menuselection ;
 	Assignmentadd assignmentadd ;
 	Assignmentview assignmentview ;
-
-	public WindowFrame() {
-		this.menuselection = new MenuSelection(this);
-		this.assignmentadd = new Assignmentadd(this);
-		this.assignmentview = new Assignmentview(this);
-
+	
+	
+	public WindowFrame(Assignmentmanager assignmentmanager) {
+		
+		this.assignmentmanager = assignmentmanager;
 		
 		this.setSize(600,300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setupPanel(menuselection);
+		menuselection = new MenuSelection(this);
+		assignmentadd = new Assignmentadd(this);
+		assignmentview = new Assignmentview(this,this.assignmentmanager);
+		this.add(menuselection);
 		this.setVisible(true);
 	}
 	

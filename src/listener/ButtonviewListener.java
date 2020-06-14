@@ -21,5 +21,4 @@ public class ButtonviewListener implements ActionListener {
 		Assignmentview view =frame.getAssignmentview();
 		frame.setupPanel(view);
 	}
-
 }

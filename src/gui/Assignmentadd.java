@@ -49,9 +49,6 @@ public class Assignmentadd extends JPanel{
 		
 		
 		this.add(p);
-		this.setVisible(true);
-		
-		
+		this.setVisible(true);	
 	}
-
 }

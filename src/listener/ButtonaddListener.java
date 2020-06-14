@@ -22,5 +22,4 @@ public class ButtonaddListener implements ActionListener {
 		Assignmentadd add =frame.getAssignmentadd();
 		frame.setupPanel(add);
 	}
-
 }
